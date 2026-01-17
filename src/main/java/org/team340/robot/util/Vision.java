@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import org.photonvision.PhotonCamera;
+import org.photonvision.PhotonPoseEstimator.PoseStrategy;
 import org.photonvision.simulation.PhotonCameraSim;
 import org.photonvision.simulation.SimCameraProperties;
 import org.photonvision.simulation.VisionSystemSim;
@@ -57,7 +58,7 @@ public final class Vision {
     private final VisionSystemSim sim;
 
     // Variables for Epilogue logging.
-    private final List<Pose2d> estimates = new ArrayList<>();
+    public final static List<Pose2d> estimates = new ArrayList<>();
     public final static List<Pose3d> targets = new ArrayList<>();
 
     /**
@@ -77,7 +78,8 @@ public final class Vision {
 
         // Hit the undocumented Photon Turbo Button™
         // https://github.com/PhotonVision/photonvision/pull/1662
-        NetworkTableInstance.getDefault().getBooleanTopic("/photonvision/use_new_cscore_frametime").publish().set(true);
+        //TODO: convince dad to let me turn this on
+        //NetworkTableInstance.getDefault().getBooleanTopic("/photonvision/use_new_cscore_frametime").publish().set(true);
     }
 
     /**
@@ -207,7 +209,7 @@ public final class Vision {
                 // tag is not configured to be utilized by the pose estimator.
                 var target = estimate.get().targetsUsed.get(0);
                 int id = target.fiducialId;
-                
+
                 // TODO: REPEMPLIMENT THIS PLEASE!!! if (!useTag(id)) continue;
 
                 // Get the location of the tag on the field.

@@ -139,7 +139,6 @@ public final class Swerve extends GRRSubsystem {
 
         // Apply vision estimates to the pose estimator.
         var measurements = vision.getUnreadResults(state.poseHistory, state.odometryPose, state.velocity);
-        //System.out.println(measurements);
         this.seesAprilTag = measurements.length > 0;
         api.addVisionMeasurements(measurements);
 
